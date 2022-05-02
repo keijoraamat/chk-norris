@@ -13,19 +13,19 @@ import { AppState } from "./state/AppState";
     {
       id: 'cat0',
       path: "/categories/0",
-      component: import('./views/categories/category'),
-      title: 'Person Edit',
+      component: import('./views/categories/categories'),
+      title: 'Cat0',
     },
     {
       id: 'cat1',
       path: '/categories/1',
-      component: import('./views/categories/category'),
+      component: import('./views/categories/categories'),
       title: 'Cat1',
     },
     {
       id: 'cat2',
       path: '/categories/2',
-      component: import('./views/categories/category'),
+      component: import('./views/categories/categories'),
       title: 'cat2',
     },
   ]
@@ -35,7 +35,7 @@ export class MyApp {
    *
    */
   constructor(private appState: AppState) {
-   console.log("MyApp costr")
+   console.log("MyApp constr")
     
   }
 }

@@ -1,0 +1,19 @@
+<import from="../../componets/category"></import>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>
+                Name
+            </th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr repeat.for="item of jokes">
+            <td>
+                <category category.bind="item"></category>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
