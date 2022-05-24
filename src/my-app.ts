@@ -25,7 +25,7 @@ import { AppState } from "./state/AppState";
     {
       id: 'cat2',
       path: '/categories/2',
-      component: import('./views/categories/categories'),
+      component: import('./views/categories/a/cat0'),
       title: 'cat2',
     },
   ]

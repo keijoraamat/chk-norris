@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+
+  chk-norris:
+    container_name: norris
+    image: node:latest
+    working_dir: /opt/chk-norris
+    command: ["npm", "run", "start"]
+    volumes:
+      - ./:/opt/chk-norris
+    ports:
+      - 80:80
+      - 8080:8080
+      - 9000:9000

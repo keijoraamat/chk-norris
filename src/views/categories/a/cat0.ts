@@ -1,9 +1,8 @@
 import { IHttpClient } from "aurelia";
-import { IJoke } from "../../domain/IJoke";
-import { IPuns } from "../../domain/IPuns";
-import { AppState } from "../../state/AppState";
+import { IJoke } from "../../../domain/IJoke";
+import { AppState } from "../../../state/AppState";
 
-export class Categories{
+export class Cat0{
     
     jokes: IJoke[] = [];
     cate: string = "";

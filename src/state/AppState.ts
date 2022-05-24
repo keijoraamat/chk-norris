@@ -5,53 +5,42 @@ import { IJoke } from "../domain/IJoke";
 import { IPuns } from "../domain/IPuns";
 
 export class AppState{
-    public categories: ICategory[] = [];
-    public puns: IPuns[] = [];
-    public catjokes: ICatJokes[] = []
+    public cats: string[] = [];
 
     constructor(@IHttpClient private http: IHttpClient){
 
         this.loadCategoriesAsyncAwait();
-        //this.getFiveRandomJokeAwait('fashion')
+        console.log(this.cats);
+
     }
 
+    attached() {
+        console.log("attached");
+    }
 
     async loadCategoriesAsyncAwait(): Promise<void>{
         try {
             let result = await this.http.get('https://api.chucknorris.io/jokes/categories');
             let json = await result.json();
-            this.categories.push({
-                cat: json[2]
-            });
-            this.categories.push({
-                cat: json[7]
-            });
-            this.categories.push({
-                cat: json[9]
-            })
-            //this.getFiveRandomJokeAwait(this.categories[0].cat);
+            let categoriesAmount = Object.keys(json).length;
+            this.cats.push(
+                json[this.randomInt(categoriesAmount)]
+            );
+            this.cats.push(
+                json[this.randomInt(categoriesAmount)]
+            );
+            this.cats.push(
+                json[this.randomInt(categoriesAmount)]
+            );
         } catch (error){
             console.log(error);
         }
     }
 
-    async getFiveRandomJokeAwait(category: string): Promise<void>{
-        try{
-            var jokes: IJoke[] = [];
-            var laughs: IPuns;
-            for (let index = 0; index < 5; index++) {
-                console.log("ITS: ", index);
-                let result = await this.http.get('https://api.chucknorris.io/jokes/random?category='+ category);
-                let json = await result.json();
-                console.log(json);
-                laughs[json.id] = json.value;
-            }
-/*             let result = await this.http.get('https://api.chucknorris.io/jokes/random?category='+ category);
-            let json = await result.json();
-            console.log(json.value) */
-            console.log(laughs);
-        } catch (error){
-
-        }
-    }
+    randomInt(max: number): number {
+        let randint = 
+        Math.floor(Math.random() * (max - 1));
+        console.log("Random int is " + randint);
+        return randint;
+      }
 }
