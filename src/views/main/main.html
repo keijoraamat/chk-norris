@@ -1,1 +1,8 @@
-Main
+<import from="../../componets/category"></import>
+
+<h2 class="text-success">All jokes</h2>
+<ol>    
+    <li repeat.for="item of jokes">
+        <category category.bind="item"></category>
+    </li>
+</ol>

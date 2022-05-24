@@ -8,9 +8,6 @@ export class Cat0{
     cate: string = "";
     
     constructor(private appState: AppState, @IHttpClient private http: IHttpClient) {
-        console.log("Categories constructor");
-        console.log("cat is: " + appState.cats[0])
-        
         this.cate = appState.cats[0];
         this.getFiveJokes();
     }
@@ -19,11 +16,12 @@ export class Cat0{
         try{
                 let result = await this.http.get('https://api.chucknorris.io/jokes/random?category='+ category);
                 let json = await result.json();
-                console.log(json);
-                this.jokes.push({
+                let joke = {
                     id: json.id,
                     value: json.value
-                })
+                };
+                this.jokes.push(joke);
+                this.appState.addJoke(joke);
         } catch (error){
             console.log(error);
         }

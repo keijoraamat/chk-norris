@@ -3,26 +3,27 @@ import { IJoke } from "../../../domain/IJoke";
 import { IPuns } from "../../../domain/IPuns";
 import { AppState } from "../../../state/AppState";
 
-export class Cat1{
+export class Cat2{
     
     jokes: IJoke[] = [];
     cate: string = "";
     
     constructor(private appState: AppState, @IHttpClient private http: IHttpClient) {
-        console.log("Categories A constructor");
-        console.log("cat is: " + appState.cats[1])
+        this.cate = appState.cats[2];
         this.getFiveJokes();
-        this.cate = appState.cats[1];
+        
     }
 
     async getRandomJokeAwait(category: string): Promise<void>{
         try{
                 let result = await this.http.get('https://api.chucknorris.io/jokes/random?category='+ category);
                 let json = await result.json();
-                this.jokes.push({
+                let joke = {
                     id: json.id,
                     value: json.value
-                })
+                };
+                this.jokes.push(joke);
+                this.appState.addJoke(joke);
         } catch (error){
 
         }

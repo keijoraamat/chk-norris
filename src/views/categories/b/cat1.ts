@@ -1,18 +1,15 @@
-import { IHttpClient } from "aurelia";
-import { IJoke } from "../../domain/IJoke";
-import { IPuns } from "../../domain/IPuns";
-import { AppState } from "../../state/AppState";
+import { bindable, IHttpClient } from "aurelia";
+import { IJoke } from "../../../domain/IJoke";
+import { IPuns } from "../../../domain/IPuns";
+import { AppState } from "../../../state/AppState";
 
-export class Categories{
+export class Cat1{
     
     jokes: IJoke[] = [];
     cate: string = "";
     
     constructor(private appState: AppState, @IHttpClient private http: IHttpClient) {
-        console.log("Categories constructor");
-        console.log("cat is: " + appState.cats[0])
-        
-        this.cate = appState.cats[0];
+        this.cate = appState.cats[1];
         this.getFiveJokes();
     }
 
@@ -20,13 +17,14 @@ export class Categories{
         try{
                 let result = await this.http.get('https://api.chucknorris.io/jokes/random?category='+ category);
                 let json = await result.json();
-                console.log(json);
-                this.jokes.push({
+                let joke = {
                     id: json.id,
                     value: json.value
-                })
+                };
+                this.jokes.push(joke);
+                this.appState.addJoke(joke);
         } catch (error){
-            console.log(error);
+
         }
     }
 
@@ -34,7 +32,7 @@ export class Categories{
         var i = 1;
         var num = 5;
         while (i <= num) {
-            this.getRandomJokeAwait(this.cate);
+            this.getRandomJokeAwait(this.cate)
             ++i;
         }
     }

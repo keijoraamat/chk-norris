@@ -6,11 +6,11 @@ import { IPuns } from "../domain/IPuns";
 
 export class AppState{
     public cats: string[] = [];
+    public jokes: IJoke[] = [];
 
     constructor(@IHttpClient private http: IHttpClient){
 
         this.loadCategoriesAsyncAwait();
-        console.log(this.cats);
 
     }
 
@@ -38,9 +38,22 @@ export class AppState{
     }
 
     randomInt(max: number): number {
-        let randint = 
-        Math.floor(Math.random() * (max - 1));
-        console.log("Random int is " + randint);
+        let randint = Math.floor(Math.random() * (max - 1));
+        //console.log("Random int is " + randint);
         return randint;
       }
+
+    addJoke(joke: IJoke): void{
+        let isPresent = true;
+        for (let index = 0; index < this.jokes.length; index++) {
+            const element = this.jokes[index];
+            if (element.id === joke.id) {
+                isPresent = false;
+            }
+            
+        }
+        if (isPresent){
+            this.jokes.push(joke);
+        }
+    }
 }
