@@ -1,8 +1,5 @@
 import { IHttpClient } from "aurelia";
-import { ICategory } from "../domain/ICategory";
-import { ICatJokes } from "../domain/ICatJokes";
 import { IJoke } from "../domain/IJoke";
-import { IPuns } from "../domain/IPuns";
 
 export class AppState{
     public cats: string[] = [];
